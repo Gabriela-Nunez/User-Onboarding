@@ -1,3 +1,9 @@
+//INTERVIEW QUESTION
+//What is end-to end- testing and its importance?
+//End to End testing focuses on how the user might interact with the UI by filling out text inputs, clicking on buttons, check boxes, ect.
+// You can detect if there are any issues the user might run into while using your application. 
+
+
 describe('Quotes App', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000');
