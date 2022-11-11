@@ -2,7 +2,7 @@ import React from 'react';
 
 const Form = (props) => {
 
-    const { values, submit, change, errors } = props;
+    const { values, submit, change, errors, disabled } = props;
     
     const onSubmit = evt => {
       evt.preventDefault();
@@ -75,7 +75,7 @@ const Form = (props) => {
           />
         </label>
         
-        <input type='submit' value='Create New User' />
+        <input type='submit' value='Create New User' disabled={disabled} />
       </form>
     </div>
   )

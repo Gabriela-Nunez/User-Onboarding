@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as yup from 'yup';
 import Form from './Components/Form';
@@ -21,11 +21,14 @@ const initialFormErrors ={
   termsOfService: ''
 }
 
+const initialDisabled = true
+
 function App() {
 
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [newUsers, setNewUsers] = useState([]);
+  const [disabled, setDisabled] = useState(initialDisabled);
 
 
   const inputChange =(name, value) => {
@@ -51,6 +54,10 @@ function App() {
   .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0]}))
 }
 
+  useEffect(() => {
+    schema.isValid(formValues).then(valid => setDisabled(!valid))
+  }, [formValues])
+
   return (
     <div className="App">
       
@@ -59,11 +66,13 @@ function App() {
       change={inputChange} 
       errors={formErrors}
       submit={formSubmit}
+      disabled={disabled}
       />
       {
       newUsers.map(newUser => {
-        return(
+        return(  
         <div key={newUser.id} className='newUser'>
+          <h2>Welcome!!!</h2>
           <p>{newUser.username}</p>
           <p>{newUser.userLastName}</p>
           <p>{newUser.email}</p>
